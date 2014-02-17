@@ -1,9 +1,11 @@
-var http = require('http'); //load the HTTP module
+var fs = require("fs");
+var http = require('http');
 
 http.createServer(function (req, res) {
-  console.log(req.url);
-  res.writeHead(200, {'Content-Type': 'text/html'});
-  res.end('<h1>Hello World</h1>');
-}).listen(8080, '127.0.0.1');
+  var fileContents = fs.readFile("data.txt", function(err, data){
+    res.writeHead(200, {'Content-Type': 'text/plain'});
+    res.end(data);
+  });
+}).listen(1337, '127.0.0.1');
 
-console.log('Server running...');
+console.log('Server running at http://127.0.0.1:1337/');
